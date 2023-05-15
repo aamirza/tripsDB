@@ -14,6 +14,8 @@ const STATUS_CODE = {
     "SERVER_ERROR": 500,
 }
 
+console.log(`env.MONGODB_CONN_STRING: ${MONGODB_CONN_STRING}`);
+
 const app = express();
 app.use(cors());
 app.use(express.json());
