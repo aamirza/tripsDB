@@ -31,15 +31,20 @@ module.exports = class TripDB {
 
     // Pass the connection string to `initialize()`
     initialize(connectionString) {
+        console.log("Attempting to connect to MongoDB...");
         return new Promise((resolve, reject) => {
+            console.log("Inside Promise of connecting to MongoDB...");
             const db = mongoose.createConnection(
                 connectionString
             );
 
             db.once('error', (err) => {
+                console.log("Error connecting to MongoDB");
                 reject(err);
             });
+
             db.once('open', () => {
+                console.log("Connected to MongoDB successfully!");
                 this.Trip = db.model("trips", tripSchema);
                 resolve();
             });
