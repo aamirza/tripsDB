@@ -60,16 +60,16 @@ app.get("/api/trips/:id", (req, res, next) => {
 });
 
 app.put("/api/trips/:id", (req, res, next) => {
-   const tripId = req.params.id;
-   const data = req.body;
-   db.updateTripById(data, tripId).then(trip => {
-       if (trip) {
-           res.send(trip);
-       } else {
-           res.status(STATUS_CODE["NOT_FOUND"]).send({message: "Trip not found"});
-       }
+    const tripId = req.params.id;
+    const data = req.body;
+    db.updateTripById(data, tripId).then(trip => {
+        if (trip) {
+            res.send(trip);
+        } else {
+            res.status(STATUS_CODE["NOT_FOUND"]).send({message: "Trip not found"});
+        }
    }).catch(err => {
-         next(err);
+        next(err);
    });
 });
 
