@@ -28,13 +28,22 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/trips", (req, res, next) => {
-    const page = req.query.page;
-    const perPage = req.query.perPage;
-    db.getAllTrips(page, perPage).then((trips) => {
-        res.send(trips);
-    }).catch((err) => {
-        next(err);
-    });
+    if (!req.query.page || !req.query.perPage) {
+        res.status(STATUS_CODE["BAD_REQUEST"]).send({message:
+                "Invalid query parameters. You need to specify page and perPage."
+        });
+    } else if (!parseInt(req.query.page) || !parseInt(req.query.perPage)) {
+        res.status(STATUS_CODE["BAD_REQUEST"]).send({message:
+                "Invalid query parameters: page and perPage must be valid numbers."});
+    } else {
+        const page = req.query.page;
+        const perPage = req.query.perPage;
+        db.getAllTrips(page, perPage).then((trips) => {
+            res.send(trips);
+        }).catch((err) => {
+            next(err);
+        });
+    }
 });
 
 app.post("/api/trips", (req, res, next) => {
