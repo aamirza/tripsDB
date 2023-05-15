@@ -38,7 +38,7 @@ app.get("/api/trips", (req, res, next) => {
 });
 
 app.post("/api/trips", (req, res, next) => {
-    db.addNewTrip(req.body.data).then(newTrip => {
+    db.addNewTrip(req.body).then(newTrip => {
             res.status(STATUS_CODE["CREATED"]).send(newTrip);
         }
     ).catch(err => {
@@ -61,7 +61,7 @@ app.get("/api/trips/:id", (req, res, next) => {
 
 app.put("/api/trips/:id", (req, res, next) => {
    const tripId = req.params.id;
-   const data = req.body.data;
+   const data = req.body;
    db.updateTripById(data, tripId).then(trip => {
        if (trip) {
            res.send(trip);
