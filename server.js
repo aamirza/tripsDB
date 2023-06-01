@@ -1,3 +1,15 @@
+/*********************************************************************************
+ *  WEB422 – Assignment 1
+ *  I declare that this assignment is my own work in accordance with Seneca  Academic Policy.
+ *  No part of this assignment has been copied manually or electronically from any other source
+ *  (including web sites) or distributed to other students.
+ *
+ *  Name: Aamir Mirza Student ID: 143271179 Date: 2023-05-15
+ *  Cyclic Link: https://curious-ring-seal.cyclic.app/
+ *
+ ********************************************************************************/
+
+
 const express = require('express');
 const cors = require('cors');
 
@@ -85,7 +97,7 @@ app.put("/api/trips/:id", (req, res, next) => {
 app.delete("/api/trips/:id", (req, res, next) => {
     const tripId = req.params.id;
     db.deleteTripById(tripId).then(() => {
-        res.status(STATUS_CODE["NO_CONTENT"]).send();
+        res.status(STATUS_CODE["NO_CONTENT"]).end();
     }).catch(err => {
         next(err);
     });
